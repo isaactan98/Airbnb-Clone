@@ -64,6 +64,9 @@
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Trips
                     </a>
+                    <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
+                      Account
+                    </a>
                   </div>
                   <div class="border-t">
                     <a href="" class="px-4 py-3 flex items-center hover:bg-gray-100">
