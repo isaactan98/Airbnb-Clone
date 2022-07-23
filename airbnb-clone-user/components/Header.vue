@@ -9,7 +9,7 @@
         </div>
         <div class="text-center px-6 flex-[0_1_auto]">
           <div class="inline-flex items-center rounded-full bg-white shadow-sm border hover:shadow-md">
-            <button class="h-12 px-4">
+            <button class="h-12 px-4 pl-6">
               <span class="text-black text-sm">Anywhere</span>
             </button>
             <button class="h-12 px-4 border-x">

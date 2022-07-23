@@ -1,9 +1,9 @@
 <template>
-  <div class="container mx-auto">
+  <div class="px-5 md:px-12 lg:px-16 xl:px-20">
     <div class="min-h-screen bg-white">
-      <div class="bg-white mt-5 p-5 grid gap-6 md:grid-cols-4">
-        <!-- loop listing -->
-        <div class="grid relative" v-for="x in 5" :key="x">
+      <div class="bg-white mt-5 p-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+        v-if="show_list == false">
+        <div class="grid relative" v-for="x, index in 10" :key="index">
           <a href="" class="block absolute h-full w-full top-0"></a>
           <div class="mb-3">
             <div class="rounded-box relative overflow-clip aspect-square">
@@ -13,8 +13,7 @@
                     <div class="inline-block h-full w-full align-bottom min-h-[100px] bg-no-repeat bg-cover"
                       style="background-position:50% 50%">
                       <picture>
-                        <img src="https://a0.muscache.com/im/pictures/373443ec-b377-4181-b753-3a2f3508c2b3.jpg?im_w=720"
-                          alt="" class=" absolute h-full w-full object-cover align-bottom">
+                        <span class="absolute h-full w-full object-cover align-bottom bg-gray-100"></span>
                       </picture>
                     </div>
                   </a>
@@ -23,11 +22,43 @@
             </div>
           </div>
           <div class="grid gap-x-2 gap-1 grid-cols-2 grid-rows-1 text-sm ">
-            <div class="font-bold">MV, Maldive</div>
+            <div class="font-bold overflow-clip break-all line-clamp-1"></div>
+            <div class="col-span-full"></div>
+            <div class="col-span-full"></div>
+            <div class="col-span-full font-bold"></div>
+            <span class="flex items-center col-[-2/-1] row-start-1 justify-end"></span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white mt-5 p-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5" v-else>
+        <!-- loop listing -->
+        <div class="grid relative" v-for="x, index in land" :key="index">
+          <a href="" class="block absolute h-full w-full top-0"></a>
+          <div class="mb-3">
+            <div class="rounded-box relative overflow-clip aspect-square">
+              <div class="grid grid-flow-col auto-cols-fr h-full justify-start ">
+                <div class="grid h-full relative">
+                  <a href="">
+                    <div class="inline-block h-full w-full align-bottom min-h-[100px] bg-no-repeat bg-cover"
+                      style="background-position:50% 50%">
+                      <picture>
+                        <img :src="x.optimizedThumbUrls.srpDesktop" alt=""
+                          class=" absolute h-full w-full object-cover align-bottom">
+                      </picture>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid gap-x-2 gap-1 grid-cols-2 grid-rows-1 text-sm ">
+            <div class="font-bold overflow-clip break-all line-clamp-1" :data-tip="x.name">{{
+                x.name
+            }}</div>
             <div class="col-span-full">3,146 kilometers away</div>
             <div class="col-span-full">Sep 13-18</div>
-            <div class="col-span-full font-bold">RM 2,767 night</div>
-            <span class="flex items-center col-[-2/-1] row-start-1 justify-end">🔥 New </span>
+            <div class="col-span-full font-bold">{{ x.ratePlan.price.current }} night</div>
+            <span class="flex items-center col-[-2/-1] row-start-1 justify-end">🔥 {{ x.guestReviews.rating }} </span>
           </div>
         </div>
         <!-- end loop -->
@@ -43,21 +74,29 @@ export default {
       title: 'Vacation Homes & Condo Rentals in the Bay Area',
     }
   },
+  data() {
+    return {
+      land: null,
+      show_list: false
+    }
+  },
   mounted() {
-    console.log('mounted')
-
     const options = {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': '35ed769778mshd7e22d4df7a7cb4p11366djsnd5401691041a',
-        'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
+        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
+        'X-RapidAPI-Host': process.env.RAPID_API_URL
       }
     };
 
-    // fetch('https://hotels4.p.rapidapi.com/properties/list?destinationId=1506246&pageNumber=1&pageSize=25&checkIn=2020-01-08&checkOut=2020-01-15&adults1=1&sortOrder=PRICE&locale=en_US&currency=USD', options)
-    //   .then(response => response.json())
-    //   .then(response => console.log(response))
-    //   .catch(err => console.error(err));
+    fetch('https://' + process.env.RAPID_API_URL + '/properties/list?destinationId=1506246&pageNumber=1&pageSize=30&checkIn=2022-07-08&checkOut=2022-07-15&adults1=1&sortOrder=PRICE&locale=en_US&currency=USD', options)
+      .then(response => response.json())
+      .then((response) => {
+        this.show_list = true
+        console.log(response)
+        this.land = response.data.body.searchResults.results
+      })
+      .catch(err => console.error(err));
   },
 }
 </script>
