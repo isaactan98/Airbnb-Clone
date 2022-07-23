@@ -33,12 +33,12 @@
       <div class="bg-white mt-5 p-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5" v-else>
         <!-- loop listing -->
         <div class="grid relative" v-for="x, index in land" :key="index">
-          <a href="" class="block absolute h-full w-full top-0"></a>
+          <a :href="'/rooms/' + x.id" class="block absolute h-full w-full top-0" target="_blank"></a>
           <div class="mb-3">
             <div class="rounded-box relative overflow-clip aspect-square">
               <div class="grid grid-flow-col auto-cols-fr h-full justify-start ">
                 <div class="grid h-full relative">
-                  <a href="">
+                  <a :href="'/rooms/' + x.id" target="_blank">
                     <div class="inline-block h-full w-full align-bottom min-h-[100px] bg-no-repeat bg-cover"
                       style="background-position:50% 50%">
                       <picture>
@@ -52,9 +52,7 @@
             </div>
           </div>
           <div class="grid gap-x-2 gap-1 grid-cols-2 grid-rows-1 text-sm ">
-            <div class="font-bold overflow-clip break-all line-clamp-1" :data-tip="x.name">{{
-                x.name
-            }}</div>
+            <div class="font-bold overflow-clip break-all line-clamp-1">{{ x.name }}</div>
             <div class="col-span-full">3,146 kilometers away</div>
             <div class="col-span-full">Sep 13-18</div>
             <div class="col-span-full font-bold">{{ x.ratePlan.price.current }} night</div>
