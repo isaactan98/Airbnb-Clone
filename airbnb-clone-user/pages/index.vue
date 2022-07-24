@@ -1,7 +1,7 @@
 <template>
   <div class="px-5 md:px-12 lg:px-16 xl:px-20">
     <div class="min-h-screen bg-white">
-      <div class="bg-white mt-5 p-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+      <div class="bg-white p-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
         v-if="show_list == false">
         <div class="grid relative" v-for="x, index in 10" :key="index">
           <a href="" class="block absolute h-full w-full top-0"></a>

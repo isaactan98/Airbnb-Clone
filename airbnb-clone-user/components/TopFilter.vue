@@ -2,7 +2,7 @@
     <div class="sticky top-20 w-full pt-5 z-10 bg-white">
         <div class="contents">
             <div class="grid px-5 md:px-12 lg:px-16 xl:px-20">
-                <div class="flex h-[78px] items-center overflow-x-auto">
+                <div class="flex h-[78px] items-center overflow-x-auto overflow-y-hidden">
                     <div class="relative grid gap-8 grid-flow-col justify-start">
                         <div class="grid grid-cols-[100%]" v-for="x in 10" :key="x">
                             <div class="">
@@ -15,23 +15,6 @@
                                         <div class="whitespace-nowrap relative">
                                             <span class="inline-block text-xs">
                                                 Islands
-                                            </span>
-                                        </div>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-[100%]" v-for="x in 10" :key="x">
-                            <div class="">
-                                <button aria-hidden="false" class="text-center pt-1 pb-3" role="radio"
-                                    aria-checked="true" type="button">
-                                    <span class="flex flex-col items-center">
-                                        <img class="i1w8ohg7 dir dir-ltr"
-                                            src="https://a0.muscache.com/pictures/3fb523a0-b622-4368-8142-b5e03df7549b.jpg"
-                                            alt="" width="24" height="24">
-                                        <div class="whitespace-nowrap relative">
-                                            <span class="inline-block text-xs">
-                                                Amazing Pool
                                             </span>
                                         </div>
                                     </span>
