@@ -1,13 +1,22 @@
 <template>
-  <main>
-    <div class="relative">
-      <div class="flex px-5 container mx-auto items-stretch w-full">
-        <h1 v-if="loading == true"></h1>
-        <section v-else>
+  <main class="mt-6">
+    <div class="relative px-5 lg:px-20">
+      <div v-if="loading == true" class="flex max-w-[1120px] mx-auto items-stretch w-full">
+        <section>
+          <h1 class="h-8 bg-gray-200 animate-pulse"></h1>
+          <div class="flex justify-between items-end">
+            <span class="mt-1">
+              <a href="" class="text-sm underline"></a>
+            </span>
+          </div>
+        </section>
+      </div>
+      <div class="flex max-w-[1120px] mx-auto items-stretch w-full" v-else>
+        <section>
           <h1 class="break-words text-2xl font-bold">{{ room_data.name }}, {{ room_data.address.cityName }}</h1>
           <div class="flex justify-between items-end">
             <span class="mt-1">
-              <a href="" class="text-sm underline">{{ room_data.address.countryName }}</a>
+              <a href="" class="text-sm underline text-black">{{ room_data.address.countryName }}</a>
             </span>
           </div>
         </section>
