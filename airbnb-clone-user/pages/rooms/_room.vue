@@ -1,15 +1,53 @@
 <template>
   <main class="mt-6">
     <div class="relative px-5 lg:px-20">
-      <div v-if="loading == true" class="flex max-w-[1120px] mx-auto items-stretch w-full">
+      <div v-if="loading == true" class="max-w-[1120px] mx-auto items-stretch w-full">
         <section>
-          <h1 class="h-8 bg-gray-200 animate-pulse"></h1>
+          <h1 class="h-8 min-w-[200px] bg-gray-200 animate-pulse"></h1>
           <div class="flex justify-between items-end">
             <span class="mt-1">
-              <a href="" class="text-sm underline"></a>
+              <a href="" class="py-1 px-14 bg-gray-200 animate-pulse"></a>
             </span>
           </div>
         </section>
+        <div class="pt-6 max-w-[1120px] mx-auto w-full">
+          <div class="rounded-3xl overflow-y-hidden">
+            <div class="cal60_64px relative overflow-y-hidden">
+              <div class="h-0 min-h-full min-w-full relative pt-[50%]">
+                <div class="absolute top-0 left-0 w-full h-full">
+                  <!-- 1st Col -->
+                  <div class="h-full w-1/2 absolute top-0 left-0">
+                    <div class="cal60_64px h-full w-full min-h-[300px]">
+                      <div class="relative h-full w-full bg-gray-200 animate-pulse"></div>
+                    </div>
+                  </div>
+                  <!-- 2nd Col -->
+                  <div class="flex h-full w-1/4 pl-2 left-1/2 top-0 absolute flex-col">
+                    <div class="cal60_64px h-full w-full">
+                      <div class="h-full sm:h-1/2">
+                        <div class="relative h-full w-full bg-gray-200 animate-pulse"></div>
+                      </div>
+                      <div class="h-full sm:h-1/2 mt-2">
+                        <div class="relative h-full w-full bg-gray-200 animate-pulse"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 3rd Col -->
+                  <div class="flex h-full w-1/4 pl-2 right-0 top-0 absolute flex-col">
+                    <div class="cal60_64px h-full w-full">
+                      <div class="h-full sm:h-1/2">
+                        <div class="relative h-full w-full bg-gray-200 animate-pulse"></div>
+                      </div>
+                      <div class="h-full sm:h-1/2 mt-2">
+                        <div class="relative h-full w-full bg-gray-200 animate-pulse"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div v-else>
         <div class="flex max-w-[1120px] mx-auto items-stretch w-full">
@@ -25,12 +63,12 @@
         <div class="pt-6 max-w-[1120px] mx-auto">
           <div class="block">
             <div class="rounded-3xl overflow-y-hidden">
-              <div class=" cal60_64px relative overflow-y-hidden">
+              <div class="cal60_64px relative overflow-y-hidden">
                 <div class="h-0 min-h-full min-w-full relative pt-[50%]">
                   <div class="absolute top-0 left-0 w-full h-full">
                     <!-- 1st Col -->
                     <div class="h-full w-1/2 absolute top-0 left-0">
-                      <div class=" cal60_64px h-full w-full min-h-[300px]">
+                      <div class="cal60_64px h-full w-full min-h-[300px]">
                         <div class="relative h-full w-full">
                           <button class="h-full w-full relative text-left block">
                             <div class="inline-block align-bottom h-full w-ful bg_50_50 bg-no-repeat ">
