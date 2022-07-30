@@ -150,6 +150,47 @@
             </div>
           </div>
         </div>
+        <div class="pt-6 max-w-[1120px] mx-auto flex items-stretch">
+          <div class="relative w-[58.33%]">
+            <div>
+              <div class="pb-3">
+                <section>
+                  <div class="hidden md:block">
+                    <div class="flex">
+                      <div class=" flex-[0_1_100%]">
+                        <div class="text-2xl mb-2">
+                          <h2 class="text-inherit">Private room in island hosted by The Isla Experience</h2>
+                        </div>
+                        <ol>
+                          <li class="inline-block"><span>2 Guest</span></li>
+                          <li class="inline-block"><span>2 Guest</span></li>
+                          <li class="inline-block"><span>2 Guest</span></li>
+                          <li class="inline-block"><span>2 Guest</span></li>
+                        </ol>
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-2xl">
+                          <div class=" block relative w-14 h-14">
+                            <button class="rounded-full w-full h-full block relative">
+                              <div class="w-14 h-14 rounded-full relative overflow-hidden">
+                                <div class="bg_50_50 bg-no-repeat w-full h-full">
+                                  <img
+                                    src="https://a0.muscache.com/im/pictures/user/d80a13e7-a564-41cf-843d-5932d3cd2ac5.jpg?im_w=240"
+                                    alt="" key="" class="object-cover align-bottom w-full h-full static">
+                                </div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="relative w-[33.33%] ml-[8.33%]"></div>
+        </div>
       </div>
     </div>
   </main>
