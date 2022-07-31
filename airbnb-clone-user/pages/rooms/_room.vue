@@ -73,9 +73,8 @@
                           <button class="h-full w-full relative text-left block">
                             <div class="inline-block align-bottom h-full w-ful bg_50_50 bg-no-repeat ">
                               <picture>
-                                <img
-                                  src="https://a0.muscache.com/im/pictures/373443ec-b377-4181-b753-3a2f3508c2b3.jpg?im_w=960"
-                                  alt="" class=" h-full w-full absolute object-cover align-bottom">
+                                <img :src="this.hero_images[0]" alt=""
+                                  class=" h-full w-full absolute object-cover align-bottom">
                               </picture>
                             </div>
                           </button>
@@ -90,9 +89,8 @@
                             <button class=" h-full w-full relative text-left">
                               <div class="inline-block align-bottom h-full w-ful bg_50_50 bg-no-repeat ">
                                 <picture>
-                                  <img
-                                    src="https://a0.muscache.com/im/pictures/7c586cfa-6a5c-4ec1-8fcd-5890b6a50769.jpg?im_w=720"
-                                    alt="" class=" object-cover align-bottom absolute h-full w-full">
+                                  <img :src="this.hero_images[1]" alt=""
+                                    class=" object-cover align-bottom absolute h-full w-full">
                                 </picture>
                               </div>
                             </button>
@@ -103,9 +101,8 @@
                             <button class=" h-full w-full relative text-left">
                               <div class="inline-block align-bottom h-full w-ful bg_50_50 bg-no-repeat ">
                                 <picture>
-                                  <img
-                                    src="https://a0.muscache.com/im/pictures/7c586cfa-6a5c-4ec1-8fcd-5890b6a50769.jpg?im_w=720"
-                                    alt="" class=" object-cover align-bottom absolute h-full w-full">
+                                  <img :src="this.hero_images[2]" alt=""
+                                    class=" object-cover align-bottom absolute h-full w-full">
                                 </picture>
                               </div>
                             </button>
@@ -121,9 +118,8 @@
                             <button class=" h-full w-full relative text-left">
                               <div class="inline-block align-bottom h-full w-ful bg_50_50 bg-no-repeat ">
                                 <picture>
-                                  <img
-                                    src="https://a0.muscache.com/im/pictures/7c586cfa-6a5c-4ec1-8fcd-5890b6a50769.jpg?im_w=720"
-                                    alt="" class=" object-cover align-bottom absolute h-full w-full">
+                                  <img :src="this.hero_images[3]" alt=""
+                                    class=" object-cover align-bottom absolute h-full w-full">
                                 </picture>
                               </div>
                             </button>
@@ -134,9 +130,8 @@
                             <button class=" h-full w-full relative text-left">
                               <div class="inline-block align-bottom h-full w-ful bg_50_50 bg-no-repeat ">
                                 <picture>
-                                  <img
-                                    src="https://a0.muscache.com/im/pictures/7c586cfa-6a5c-4ec1-8fcd-5890b6a50769.jpg?im_w=720"
-                                    alt="" class=" object-cover align-bottom absolute h-full w-full">
+                                  <img :src="this.hero_images[4]" alt=""
+                                    class=" object-cover align-bottom absolute h-full w-full">
                                 </picture>
                               </div>
                             </button>
@@ -207,11 +202,17 @@ export default {
     return {
       roomId: this.$route.params.room,
       room_data: null,
+      images: null,
+      hero_images: [],
       loading: true
     }
   },
   mounted() {
-    const url = 'https://' + process.env.RAPID_API_URL + '/properties/get-details?id=' + this.roomId + '&checkIn=2020-01-08&checkOut=2020-01-15&adults1=1&currency=USD&locale=en_US';
+    const today = new Date();
+    const next_3_day = new Date(today.getTime() + (3 * 24 * 60 * 60 * 1000));
+
+    const url = 'https://' + process.env.RAPID_API_URL + '/properties/get-details?id=' + this.roomId + '&checkIn=' + today.toISOString().split('T')[0] + '&checkOut=' + next_3_day.toISOString().split('T')[0] + '&adults1=1&currency=USD&locale=en_US';
+    const imges_url = 'https://hotels4.p.rapidapi.com/properties/get-hotel-photos?id=' + this.roomId;
 
     const options = {
       method: 'GET',
@@ -227,6 +228,18 @@ export default {
         console.log(json)
         this.loading = false
         this.room_data = json.data.body.propertyDescription
+      })
+      .catch(err => console.error('error:' + err));
+
+    fetch(imges_url, options)
+      .then(res => res.json())
+      .then(json => {
+        this.images = json.hotelImages
+        this.hero_images[0] = this.images[0].baseUrl.replace('{size}', this.images[0].sizes[0].suffix)
+        this.hero_images[1] = this.images[1].baseUrl.replace('{size}', this.images[1].sizes[1].suffix)
+        this.hero_images[2] = this.images[2].baseUrl.replace('{size}', this.images[2].sizes[2].suffix)
+        this.hero_images[3] = this.images[3].baseUrl.replace('{size}', this.images[3].sizes[3].suffix)
+        this.hero_images[4] = this.images[4].baseUrl.replace('{size}', this.images[4].sizes[4].suffix)
       })
       .catch(err => console.error('error:' + err));
   },

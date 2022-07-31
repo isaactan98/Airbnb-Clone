@@ -58,7 +58,7 @@
               <div class="col-span-full">3,146 kilometers away</div>
               <div class="col-span-full">Sep 13-18</div>
               <div class="col-span-full font-bold">{{ x.ratePlan.price.current }} night</div>
-              <span class="flex items-center col-[-2/-1] row-start-1 justify-end">🔥 {{ x.guestReviews.rating }} </span>
+              <span class="flex items-center col-[-2/-1] row-start-1 justify-end">🔥 {{ x.guestReviews.rating ?? 0 }} </span>
             </div>
           </div>
           <!-- end loop -->
@@ -83,6 +83,10 @@ export default {
     };
   },
   mounted() {
+
+    const today = new Date();
+    const next_3_day = new Date(today.getTime() + (3 * 24 * 60 * 60 * 1000));
+
     const options = {
       method: "GET",
       headers: {
@@ -90,7 +94,7 @@ export default {
         "X-RapidAPI-Host": process.env.RAPID_API_URL
       }
     };
-    fetch("https://" + process.env.RAPID_API_URL + "/properties/list?destinationId=1506246&pageNumber=1&pageSize=30&checkIn=2022-07-08&checkOut=2022-07-15&adults1=1&sortOrder=PRICE&locale=en_US&currency=USD", options)
+    fetch("https://" + process.env.RAPID_API_URL + "/properties/list?destinationId=1506246&pageNumber=1&pageSize=30&checkIn=" + today.toISOString().split('T')[0] + "&checkOut=" + next_3_day.toISOString().split('T')[0] + "&adults1=1&sortOrder=PRICE&locale=en_US&currency=USD", options)
       .then(response => response.json())
       .then((response) => {
         this.show_list = true;
