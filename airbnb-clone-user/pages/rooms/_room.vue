@@ -146,7 +146,7 @@
           </div>
         </div>
         <div class="pt-6 max-w-[1120px] mx-auto flex items-stretch">
-          <div class="relative w-[58.33%]">
+          <div class="relative w-full md:w-[58.33%]">
             <div class="border-b">
               <div class="pb-3">
                 <section>
@@ -198,7 +198,7 @@
 
                           <!-- rooms -->
                           <div
-                            class="inline-block w-full sm:w-1/2 md:w-1/3 align-top whitespace-normal flex-[0_0_auto] carousel-item"
+                            class="inline-block w-2/3 md:w-1/3 align-top whitespace-normal flex-[0_0_auto] carousel-item"
                             :id="`room` + rk" v-for="room, rk in rooms" :key="rk">
                             <div class="px-[6px] w-full h-full md:px-2">
                               <div class="p-6 border rounded-lg w-full h-full">
@@ -239,7 +239,7 @@
 
                   <div class="" v-for="am, ak in amenities[1].listItems" :key="ak">
                     <div class="mb-2 font-semibold">{{ am.heading }}</div>
-                    <div class="grid grid-cols-2">
+                    <div class="grid md:grid-cols-2">
                       <div v-for="a, k in am.listItems" :key="k">
                         <div class="flex pb-4 justify-end flex-row-reverse items-center">
                           <div>{{ a }}</div>
@@ -262,7 +262,7 @@
               </div>
             </div>
           </div>
-          <div class="relative w-[33.33%] ml-[8.33%]"></div>
+          <div class="relative w-full md:w-[33.33%] ml-[8.33%]"></div>
         </div>
       </div>
     </div>
