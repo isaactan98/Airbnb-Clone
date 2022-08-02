@@ -147,20 +147,20 @@
         </div>
         <div class="pt-6 max-w-[1120px] mx-auto flex items-stretch">
           <div class="relative w-[58.33%]">
-            <div>
+            <div class="border-b">
               <div class="pb-3">
                 <section>
                   <div class="hidden md:block">
                     <div class="flex">
                       <div class=" flex-[0_1_100%]">
                         <div class="text-2xl mb-2">
-                          <h2 class="text-inherit">Private room in island hosted by The Isla Experience</h2>
+                          <h2 class="text-inherit" v-html="room_data.tagline[0]">
+                          </h2>
                         </div>
                         <ol>
-                          <li class="inline-block"><span>2 Guest</span></li>
-                          <li class="inline-block"><span>2 Guest</span></li>
-                          <li class="inline-block"><span>2 Guest</span></li>
-                          <li class="inline-block"><span>2 Guest</span></li>
+                          <li class="inline-block" v-for="free, keys in room_data.freebies" :key="keys">
+                            <span>{{ free }}</span>
+                          </li>
                         </ol>
                       </div>
                       <div class="ml-4">
@@ -183,10 +183,91 @@
                 </section>
               </div>
             </div>
+            <div class="border-b">
+              <div class="pb-3">
+                <div class="py-6">
+                  <div class="text-2xl leading-7 font-semibold pb-6">
+                    <section>
+                      <h2 tabindex="-1">Where you'll sleep</h2>
+                    </section>
+                  </div>
+                  <div class="relative">
+                    <div class="-mx-2 overflow-hidden">
+                      <div style="margin-top: 0px; margin-bottom: 0px;">
+                        <div class="carousel carousel-center">
+
+                          <!-- rooms -->
+                          <div
+                            class="inline-block w-full sm:w-1/2 md:w-1/3 align-top whitespace-normal flex-[0_0_auto] carousel-item"
+                            :id="`room` + rk" v-for="room, rk in rooms" :key="rk">
+                            <div class="px-[6px] w-full h-full md:px-2">
+                              <div class="p-6 border rounded-lg w-full h-full">
+                                <div class="mb-4" aria-hidden="true">
+                                  <span class="inline-block mr-2">
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                      role="presentation" focusable="false"
+                                      style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                                      <path
+                                        d="M24 4a2 2 0 0 1 1.995 1.85L26 6v7.839l1.846 5.537a3 3 0 0 1 .115.468l.03.24.009.24V30h-2v-2H6v2H4v-9.675a3 3 0 0 1 .087-.717l.067-.232L6 13.836V6a2 2 0 0 1 1.697-1.977l.154-.018L8 4zm2 18H6v4h20zm-1.388-6H7.387l-1.333 4h19.891zM24 6H8v8h3v-4a2 2 0 0 1 1.85-1.995L13 8h6a2 2 0 0 1 1.995 1.85L21 10v4h3zm-5 4h-6v4h6z">
+                                      </path>
+                                    </svg>
+                                  </span>
+                                </div>
+                                <div class="mb-2 text-sm font-semibold">{{ room.name }}</div>
+                                <div class="text-xs text-zinc-600">{{ room.bedChoices.mainOptions[0] }}</div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-b">
+              <div class="pb-3">
+                <section class="py-6">
+                  <div class="text-2xl leading-7 font-semibold pb-6">
+                    <section>
+                      <h2 tabindex="-1">What this place offers
+                      </h2>
+                    </section>
+                  </div>
+
+
+                  <div class="" v-for="am, ak in amenities[1].listItems" :key="ak">
+                    <div class="mb-2 font-semibold">{{ am.heading }}</div>
+                    <div class="grid grid-cols-2">
+                      <div v-for="a, k in am.listItems" :key="k">
+                        <div class="flex pb-4 justify-end flex-row-reverse items-center">
+                          <div>{{ a }}</div>
+                          <div class="mr-4">
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                              role="presentation" focusable="false"
+                              style="display: block; height: 24px; width: 24px; fill: currentcolor;">
+                              <path
+                                d="M28 2a2 2 0 0 1 2 2v24a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2H4v15.499l.187-.007c.371-.033.72-.161 1.005-.372l.137-.111A3.975 3.975 0 0 1 8 18c.988 0 1.945.352 2.671 1.009.35.316.826.49 1.33.491.502 0 .979-.175 1.328-.492A3.974 3.974 0 0 1 16 18c.988 0 1.945.351 2.671 1.009.35.316.826.49 1.33.491.502 0 .979-.175 1.328-.491A3.975 3.975 0 0 1 23.999 18c.989 0 1.946.351 2.672 1.009.35.316.827.49 1.33.491l-.001 2-.228-.006a3.96 3.96 0 0 1-2.443-1.003A1.978 1.978 0 0 0 24 20c-.502 0-.978.175-1.328.491a3.977 3.977 0 0 1-2.67 1.009 3.977 3.977 0 0 1-2.672-1.009A1.978 1.978 0 0 0 16 20c-.503 0-.98.175-1.329.491a3.978 3.978 0 0 1-2.67 1.009 3.978 3.978 0 0 1-2.672-1.008A1.978 1.978 0 0 0 8 20c-.503 0-.98.175-1.33.491A3.976 3.976 0 0 1 4 21.5v2.999l.187-.007c.371-.033.72-.161 1.005-.372l.137-.111A3.975 3.975 0 0 1 8 23c.988 0 1.945.352 2.671 1.009.35.316.826.49 1.33.491.502 0 .979-.175 1.328-.492A3.974 3.974 0 0 1 16 23c.988 0 1.945.351 2.671 1.009.35.316.826.49 1.33.491.502 0 .979-.175 1.328-.491A3.975 3.975 0 0 1 23.999 23c.989 0 1.946.351 2.672 1.009.35.316.827.49 1.33.491l-.001 2-.228-.006a3.96 3.96 0 0 1-2.443-1.003A1.978 1.978 0 0 0 24 25c-.502 0-.978.175-1.328.491a3.977 3.977 0 0 1-2.67 1.009 3.977 3.977 0 0 1-2.672-1.009A1.978 1.978 0 0 0 16 25c-.503 0-.98.175-1.329.491a3.978 3.978 0 0 1-2.67 1.009 3.978 3.978 0 0 1-2.672-1.008A1.978 1.978 0 0 0 8 25c-.503 0-.98.175-1.33.491A3.976 3.976 0 0 1 4 26.5V28h24zm-6 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z">
+                              </path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </section>
+              </div>
+            </div>
           </div>
           <div class="relative w-[33.33%] ml-[8.33%]"></div>
         </div>
       </div>
+    </div>
+    <div class="py-3">
+      <div>Footer</div>
     </div>
   </main>
 </template>
@@ -204,7 +285,9 @@ export default {
       room_data: null,
       images: null,
       hero_images: [],
-      loading: true
+      loading: true,
+      rooms: null,
+      amenities: null
     }
   },
   mounted() {
@@ -228,6 +311,8 @@ export default {
         console.log(json)
         this.loading = false
         this.room_data = json.data.body.propertyDescription
+        this.rooms = json.data.body.roomsAndRates.rooms
+        this.amenities = json.data.body.amenities
       })
       .catch(err => console.error('error:' + err));
 

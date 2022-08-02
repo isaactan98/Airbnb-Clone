@@ -58,7 +58,8 @@
               <div class="col-span-full">3,146 kilometers away</div>
               <div class="col-span-full">Sep 13-18</div>
               <div class="col-span-full font-bold">{{ x.ratePlan.price.current }} night</div>
-              <span class="flex items-center col-[-2/-1] row-start-1 justify-end">🔥 {{ x.guestReviews.rating ?? 0 }} </span>
+              <span class="flex items-center col-[-2/-1] row-start-1 justify-end">🔥 {{ x.guestReviews.rating ?? 0 }}
+              </span>
             </div>
           </div>
           <!-- end loop -->
