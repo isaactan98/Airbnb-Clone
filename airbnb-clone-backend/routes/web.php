@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HostingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::match(['get', 'post'], '/dashboard/hosting', [HostingController::class, 'listing'])->name('hosting.listing');
