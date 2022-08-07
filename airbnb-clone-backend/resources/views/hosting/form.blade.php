@@ -1,4 +1,13 @@
 <x-app-layout>
+    <style>
+        .ck-content {
+            height: 300px;
+        }
+    </style>
+    @section('title')
+        {{ $title }} Hosting -
+    @endsection
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $title }} Hosting
@@ -32,15 +41,15 @@
                                         <label for="name" class="label">
                                             <span class="label-text">Title</span>
                                         </label>
-                                        <input type="text" class="input input-bordered w-full" id="name"
-                                            name="name" value="{{ old('name', @$hosting->name) }}"
-                                            placeholder="Name">
+                                        <input type="text" class="input input-bordered w-full" id="title"
+                                            name="title" value="{{ old('title', @$hosting->title) }}"
+                                            placeholder="Title" autocomplete="off">
                                     </div>
                                     <div class="form-control">
                                         <label for="name" class="label">
                                             <span class="label-text">Description</span>
                                         </label>
-                                        <textarea name="description" class="input input-bordered h-full" rows="10">{{ old('description', @$hosting->description) }}</textarea>
+                                        <textarea name="description" id="editor" class="input input-bordered h-full" rows="10">{{ old('description', @$hosting->description) }}</textarea>
                                     </div>
                                 </div>
                                 <div class="grid gap-4">
@@ -50,15 +59,15 @@
                                         </label>
                                         <input type="text" class="input input-bordered w-full" id="location"
                                             name="location" value="{{ old('location', @$hosting->location) }}"
-                                            placeholder="Location">
+                                            placeholder="Location" autocomplete="off">
                                     </div>
                                     <div class="form-control">
                                         <label for="location" class="label">
                                             <span class="label-text">Price</span>
                                         </label>
                                         <input type="number" class="input input-bordered w-full" id="price"
-                                            name="price" value="{{ old('price', @$hosting->location) }}"
-                                            placeholder="Price" min="1">
+                                            name="price" value="{{ old('price', @$hosting->price) }}"
+                                            placeholder="Price" min="1" autocomplete="off">
                                     </div>
                                     <div class="form-control">
                                         <label class="label">
@@ -67,7 +76,9 @@
                                         <label class="input-group">
                                             <button type="button" class="btn btn-ghost rounded-full">-</button>
                                             <input type="text" value="1" min="1"
-                                                class="input input-bordered text-center" />
+                                                class="input input-bordered text-center"
+                                                value="{{ old('number_of_gues', @$hosting->number_of_guest) }}"
+                                                name="number_of_guest" autocomplete="off" />
                                             <button type="button" class="btn btn-ghost rounded-full">+</button>
                                         </label>
                                     </div>
@@ -75,7 +86,8 @@
                                         <label for="" class="label">Status</label>
                                         <select class="select select-bordered" name="status">
                                             @foreach ($hosting_status as $status)
-                                                <option>{{ $status }}</option>
+                                                <option @if ($status == old('status', @$hosting->status)) selected @endif
+                                                    value="{{ $status }}">{{ $status }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -83,7 +95,8 @@
                                         <label for="" class="label">Type</label>
                                         <select class="select select-bordered" name="type">
                                             @foreach ($hosting_type as $type)
-                                                <option>{{ $type }}</option>
+                                                <option @if ($type == old('type', @$hosting->type)) selected @endif
+                                                    value="{{ $type }}">{{ $type }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -91,7 +104,7 @@
                             </div>
                             <div class="form-control w-full">
                                 <div class="flex justify-end">
-                                    <button type="submit" class="btn">Submit</button>
+                                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                                 </div>
                             </div>
                         </div>

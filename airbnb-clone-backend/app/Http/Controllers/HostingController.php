@@ -22,7 +22,7 @@ class HostingController extends Controller
 
     public function listing()
     {
-        $hostings = Hosting::all();
+        $hostings = Hosting::query()->orderBy('updated_at', 'desc')->paginate(10);
 
         return view('hosting.listing', compact('hostings'));
     }
@@ -33,12 +33,12 @@ class HostingController extends Controller
         if ($request->isMethod('post')) {
 
             $validation = $request->validate([
-                'name' => 'required',
+                'title' => 'required',
             ]);
 
             if ($validation) {
                 $hosting = new Hosting();
-                $hosting->title = $request->name;
+                $hosting->title = $request->title;
                 $hosting->description = $request->description;
                 $hosting->price = $request->price;
                 $hosting->location = $request->location;
@@ -56,6 +56,38 @@ class HostingController extends Controller
         return view('hosting.form', [
             'title' => 'New',
             'submit' => route('hosting.create'),
+            'hosting_status' => $this->hosting_status,
+            'hosting_type' => $this->hosting_type,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $hosting = Hosting::find($id);
+
+        if ($request->isMethod('post')) {
+            $validation = $request->validate([
+                'title' => 'required',
+            ]);
+            if ($validation) {
+                $hosting->title = $request->title;
+                $hosting->description = $request->description;
+                $hosting->price = $request->price;
+                $hosting->location = $request->location;
+                $hosting->hosting_type = $request->type;
+                $hosting->status = $request->status;
+                $hosting->save();
+                session()->flash('flash.banner', 'Succesfully updated hosting!');
+                session()->flash('flash.bannerStyle', 'success');
+                return redirect()->route('hosting.listing');
+            }
+        }
+
+
+        return view('hosting.form', [
+            'title' => 'Update',
+            'submit' => route('hosting.update', $id),
+            'hosting' => $hosting,
             'hosting_status' => $this->hosting_status,
             'hosting_type' => $this->hosting_type,
         ]);

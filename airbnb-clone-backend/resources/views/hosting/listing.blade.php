@@ -1,4 +1,7 @@
 <x-app-layout>
+    @section('title')
+        Hosting Listing - 
+    @endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ count($hostings) . __(' Listing') }}
@@ -36,7 +39,8 @@
                                     </td>
                                     <td class="py-4 px-2">
                                         <div class="flex-grow">
-                                            <div class="font-extrabold text-sm leading-5 text-ellipsis">{{ $host->title }}</div>
+                                            <div class="font-extrabold text-sm leading-5 text-ellipsis">
+                                                {{ $host->title }}</div>
                                         </div>
                                     </td>
                                     <td class="py-4 px-2">
@@ -55,7 +59,8 @@
                                         </div>
                                     </td>
                                     <td class="py-4 px-2">
-                                        <a href="" class="py-2 px-4 border rounded-md border-black">List</a>
+                                        <a href="{{ route('hosting.update', $host->id) }}"
+                                            class="py-2 px-4 border rounded-md border-black">List</a>
                                     </td>
                                     <td class="py-4 px-2">1</td>
                                     <td class="py-4 px-2">1</td>
@@ -68,6 +73,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    {{ $hostings->links() }}
                 </div>
             </div>
         </div>
