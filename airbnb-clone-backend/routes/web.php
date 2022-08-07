@@ -28,4 +28,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::match(['get', 'post'], '/dashboard/hosting', [HostingController::class, 'listing'])->name('hosting.listing');
+Route::middleware(['auth'])->group(function () {
+    Route::match(['get', 'post'], '/dashboard/hosting', [HostingController::class, 'listing'])->name('hosting.listing');
+    Route::match(['get', 'post'], '/dashboard/hosting/create', [HostingController::class, 'create'])->name('hosting.create');
+});

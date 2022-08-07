@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ count($hostings) . __(' Listing') }}
         </h2>
+        <a href="{{ route('hosting.create') }}" class="btn btn-outline btn-sm">Create Listing</a>
     </x-slot>
 
     <div class="py-12">
@@ -35,7 +36,7 @@
                                     </td>
                                     <td class="py-4 px-2">
                                         <div class="flex-grow">
-                                            <div class="font-extrabold text-sm leading-5 text-ellipsis">Testing</div>
+                                            <div class="font-extrabold text-sm leading-5 text-ellipsis">{{ $host->title }}</div>
                                         </div>
                                     </td>
                                     <td class="py-4 px-2">
@@ -49,7 +50,7 @@
                                                 </svg>
                                             </div>
                                             <div class="flex ml-2 text-left flex-col justify-between items-start">
-                                                <div class="text-sm leading-4">Unlisted</div>
+                                                <div class="text-sm leading-4">{{ ucfirst($host->status) }}</div>
                                             </div>
                                         </div>
                                     </td>
@@ -59,9 +60,9 @@
                                     <td class="py-4 px-2">1</td>
                                     <td class="py-4 px-2">1</td>
                                     <td class="py-4 px-2">1</td>
-                                    <td class="py-4 px-2">Johor Bahru, Johor</td>
+                                    <td class="py-4 px-2">{{ $host->location }}</td>
                                     <td class="py-4 px-2">
-                                        {{ $now }}
+                                        {{ $host->updated_at->diffForHumans() }}
                                     </td>
                                 </tr>
                             @endforeach
