@@ -41,6 +41,7 @@ class HostingController extends Controller
                 $hosting->title = $request->title;
                 $hosting->description = $request->description;
                 $hosting->price = $request->price;
+                $hosting->number_of_guest = $request->number_of_guest;
                 $hosting->location = $request->location;
                 $hosting->hosting_type = $request->type;
                 $hosting->status = $request->status;
@@ -73,6 +74,7 @@ class HostingController extends Controller
                 $hosting->title = $request->title;
                 $hosting->description = $request->description;
                 $hosting->price = $request->price;
+                $hosting->number_of_guest = $request->number_of_guest;
                 $hosting->location = $request->location;
                 $hosting->hosting_type = $request->type;
                 $hosting->status = $request->status;

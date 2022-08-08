@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('location');
             $table->string('hosting_type');
+            $table->integer('number_of_guest');
             $table->enum('status', ['active', 'inactive', 'unlisted', 'deleted']);
             $table->timestamps();
         });

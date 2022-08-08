@@ -75,9 +75,9 @@
                                         </label>
                                         <label class="input-group">
                                             <button type="button" class="btn btn-ghost rounded-full">-</button>
-                                            <input type="text" value="1" min="1"
+                                            <input type="text" min="1"
                                                 class="input input-bordered text-center"
-                                                value="{{ old('number_of_gues', @$hosting->number_of_guest) }}"
+                                                value="{{ old('number_of_guest', @$hosting->number_of_guest) }}"
                                                 name="number_of_guest" autocomplete="off" />
                                             <button type="button" class="btn btn-ghost rounded-full">+</button>
                                         </label>
@@ -114,7 +114,7 @@
         </div>
     </div>
     <script>
-        var guests = 1;
+        var guests = {{ @$hosting->number_of_guest ?? 1 }};
         var guestsInput = document.querySelector('.input-group input');
         var guestsButtonMinus = document.querySelector('.input-group button:first-child');
         var guestsButtonPlus = document.querySelector('.input-group button:last-child');
