@@ -97,4 +97,17 @@ class HostingController extends Controller
             'hosting_type' => $this->hosting_type,
         ]);
     }
+
+    public function api_listing()
+    {
+        $hostings = Hosting::query()
+            ->where('status', '!=', 'deleted')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $print = json_encode($hostings, JSON_PRETTY_PRINT);
+
+        return response($print, 200)
+            ->header('Content-Type', 'application/json');
+    }
 }
