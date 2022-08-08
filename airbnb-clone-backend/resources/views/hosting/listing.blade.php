@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        Hosting Listing - 
+        Hosting Listing -
     @endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -10,7 +10,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="overflow-x-auto">
                     <table class="table w-full">
@@ -32,6 +32,24 @@
                         </thead>
                         <tbody>
                             @foreach ($hostings as $host)
+                                @php
+                                    $color = '#C13515';
+                                    
+                                    switch ($host->status) {
+                                        case 'active':
+                                            $color = '#00A859';
+                                            break;
+                                        case 'inactive':
+                                            $color = '#C13515';
+                                            break;
+                                        case 'unlisted':
+                                            $color = '#b2b2b2';
+                                            break;
+                                        default:
+                                            # code...
+                                            break;
+                                    }
+                                @endphp
                                 <tr class="border-b">
                                     <td class="text-center">
                                         <input type="checkbox" name="" id=""
@@ -47,7 +65,8 @@
                                         <div class="flex items-center">
                                             <div>
                                                 <svg viewBox="0 0 16 16" role="presentation" aria-hidden="true"
-                                                    focusable="false" style="height:10px;width:10px;fill:#C13515">
+                                                    focusable="false"
+                                                    style="height:10px;width:10px;fill: {{ $color }}">
                                                     <ellipse cx="8" cy="8" fill-rule="evenodd"
                                                         rx="8" ry="8">
                                                     </ellipse>

@@ -49,7 +49,7 @@
                                         <label for="name" class="label">
                                             <span class="label-text">Description</span>
                                         </label>
-                                        <textarea name="description" id="editor" class="input input-bordered h-full" rows="10">{{ old('description', @$hosting->description) }}</textarea>
+                                        <textarea name="description" id="editor" class="input input-bordered h-full" rows="10">{{ old('description', @$hosting->description ?? 'Having a great space to stay makes you happy') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="grid gap-4">

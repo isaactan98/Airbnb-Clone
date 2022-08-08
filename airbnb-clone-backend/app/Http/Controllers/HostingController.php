@@ -22,7 +22,10 @@ class HostingController extends Controller
 
     public function listing()
     {
-        $hostings = Hosting::query()->orderBy('updated_at', 'desc')->paginate(10);
+        $hostings = Hosting::query()
+            ->where('status', '!=', 'deleted')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
 
         return view('hosting.listing', compact('hostings'));
     }
