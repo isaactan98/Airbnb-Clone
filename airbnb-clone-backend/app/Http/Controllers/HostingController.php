@@ -23,6 +23,7 @@ class HostingController extends Controller
     public function listing()
     {
         $hostings = Hosting::query()
+            ->where('user_id', auth()->user()->id)
             ->where('status', '!=', 'deleted')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
@@ -41,6 +42,7 @@ class HostingController extends Controller
 
             if ($validation) {
                 $hosting = new Hosting();
+                $hosting->user_id = auth()->user()->id;
                 $hosting->title = $request->title;
                 $hosting->description = $request->description;
                 $hosting->price = $request->price;

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('hosting', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('title');
             $table->text('description');
             $table->integer('price');
