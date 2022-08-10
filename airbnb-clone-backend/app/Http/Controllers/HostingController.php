@@ -103,7 +103,7 @@ class HostingController extends Controller
     public function api_listing()
     {
         $hostings = Hosting::query()
-            ->where('status', '!=', 'deleted')
+            ->where('status', 'active')
             ->orderBy('created_at', 'desc')
             ->get();
 

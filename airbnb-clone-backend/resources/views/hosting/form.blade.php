@@ -1,9 +1,4 @@
 <x-app-layout>
-    <style>
-        .ck-content {
-            height: 300px;
-        }
-    </style>
     @section('title')
         {{ $title }} Hosting -
     @endsection
@@ -104,7 +99,8 @@
                             </div>
                             <div class="form-control w-full">
                                 <div class="flex justify-end">
-                                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                    <a href="{{ route('hosting.listing') }}" class="btn mr-2">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </div>

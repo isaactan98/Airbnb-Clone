@@ -57,7 +57,7 @@
                   </div>
                 </button>
                 <div tabindex="0" class="dropdown-content menu bg-white p-2 shadow-xl rounded-box w-52 mt-3">
-                  <div>
+                  <div v-if="user != null">
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Message
                     </a>
@@ -67,6 +67,15 @@
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Account
                     </a>
+                  </div>
+                  <div v-else>
+                    <label for="login_modal"
+                      class="modal-button px-4 py-3 w-full flex items-center text-black hover:bg-gray-100">
+                      Login
+                    </label>
+                    <label for="register_modal" class="px-4 py-3 w-full flex items-center text-black hover:bg-gray-100">
+                      Register
+                    </label>
                   </div>
                   <div class="border-t">
                     <a href="" class="px-4 py-3 flex items-center hover:bg-gray-100">
@@ -83,12 +92,22 @@
         </div>
       </div>
     </header>
+
+    <Login :id="'login_modal'"></Login>
+
+    <Register :id="'register_modal'"></Register>
+    
   </div>
 </template>
 
 <script>
 import Logo from './Logo.vue'
-export default { components: { Logo } }
+import Login from './Login.vue'
+import Register from './Register.vue'
+export default {
+  components: { Logo, Login, Register },
+  props: ['user']
+}
 </script>
 
 <style>
