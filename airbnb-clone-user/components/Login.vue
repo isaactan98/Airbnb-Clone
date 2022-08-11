@@ -25,7 +25,7 @@
                     </div>
                     <div class="mt-2">
                         <div class="form-control">
-                            <button type="submit" class="btn bg-pink-600 border-0">Continue</button>
+                            <button type="submit" id="submit_btn" class="btn bg-pink-600 border-0">Continue</button>
                         </div>
                     </div>
                 </form>
@@ -50,6 +50,8 @@ export default {
     },
     methods: {
         async login() {
+            const submit_btn = document.getElementById('submit_btn');
+            submit_btn.classList.add('loading');
             try {
                 await this.$auth.loginWith('local', {
                     data: {
@@ -59,6 +61,7 @@ export default {
                 }).then((result) => {
                     this.$auth.setUser(result.data.user)
                     // console.log(this.$auth.user);
+                    submit_btn.classList.remove('loading');
                     const login_modal = document.querySelector('#login_modal');
                     login_modal.click();
                 })
