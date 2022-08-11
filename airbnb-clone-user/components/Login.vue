@@ -29,6 +29,11 @@
                         </div>
                     </div>
                 </form>
+                <div class="mt-2 block md:hidden">
+                    <label for="register_modal" id="small_register_link">
+                        <span>Haven't Register?</span>
+                    </label>
+                </div>
             </label>
         </label>
     </div>
@@ -64,6 +69,11 @@ export default {
     },
     mounted() {
         this.$axios.$get('/sanctum/csrf-cookie');
+        const small_register = document.querySelector('#small_register_link');
+        small_register.addEventListener('click', (e) => {
+            const login_modal = document.querySelector('#login_modal');
+            login_modal.click();
+        });
     }
 }
 </script>

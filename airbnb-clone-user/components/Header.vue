@@ -51,12 +51,9 @@
                     </svg>
                   </div>
                   <div class="h-8 w-8 ml-3 relative">
-                    <img class="rounded-full" v-if="this.$auth.user"
-                      :src="this.$auth.user.profile_photo_url"
-                      alt="" />
+                    <img class="rounded-full" v-if="this.$auth.user" :src="this.$auth.user.profile_photo_url" alt="" />
                     <img class="rounded-full" v-else
-                      src="https://a0.muscache.com/im/pictures/user/0507f9c4-fb25-4e53-9dc9-4ff17a0b2a45.jpg?aki_policy=profile_medium"
-                      alt="" />
+                      src="https://avatars.dicebear.com/api/male/john.svg?background=%230000ff">
                   </div>
                 </button>
                 <div tabindex="0" class="dropdown-content menu bg-white p-2 shadow-xl rounded-box w-52 mt-3">
