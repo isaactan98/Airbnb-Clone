@@ -36,12 +36,14 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: process.env.BACKEND_URL,
+    credentials: true
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -60,8 +62,46 @@ export default {
       },
     },
   },
+
   env: {
     RAPID_API_URL: process.env.RAPID_API_URL,
     RAPID_API_KEY: process.env.RAPID_API_KEY,
+    BACKEND_URL: process.env.BACKEND_URL,
+  },
+
+  auth: {
+    strategies: {
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: process.env.BACKEND_URL,
+        endpoints: {
+          login: {
+            url: '/api/login'
+          },
+          logout: {
+            url: '/api/logout'
+          },
+        },
+        user: {
+          property: 'data.user',
+        }
+      },
+      local: {
+        token: {
+          property: 'XSRF-TOKEN',// as my backend send meta.token instead of token
+          required: true,
+          type: 'Bearer',
+        },
+        endpoints: {
+          login: { url: '/api/login', method: 'post', propertyName: false },
+          user: { url: '/api/user', method: 'get', propertyName: false }
+        },
+        tokenRequired: false,
+        tokenType: false,
+        user: {
+          property: 'data.user',
+        }
+      }
+    }
   }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -31,29 +32,21 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->save();
-            return response()->json(['message' => 'User created successfully!']);
+            return response()->json(['message' => 'User created successfully!', 'user' => $user]);
         }
     }
 
     public function api_login(Request $request)
     {
-        $validation = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        if ($validation) {
-            $user = User::where('email', $request->email)->first();
-            if ($user) {
-                if (Hash::check($request->password, $user->password)) {
-                    $api_token = base64_encode(Str::random(40));
-                    $user->update(['api_token' => $api_token]);
-                    return response()->json(['message' => 'User logged in successfully!', 'api_token' => $api_token]);
-                } else {
-                    return response()->json(['message' => 'Password is incorrect!']);
-                }
-            } else {
-                return response()->json(['message' => 'User not found!']);
-            }
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'message' => 'Invalid login details'
+            ], 401);
         }
+        $request->session()->regenerate();
+        return response()->json([
+            'message' => 'Login successful',
+            'user' => auth()->user()
+        ]);
     }
 }

@@ -51,13 +51,16 @@
                     </svg>
                   </div>
                   <div class="h-8 w-8 ml-3 relative">
-                    <img class="rounded-full"
+                    <img class="rounded-full" v-if="this.$auth.user"
+                      :src="this.$auth.user.profile_photo_url"
+                      alt="" />
+                    <img class="rounded-full" v-else
                       src="https://a0.muscache.com/im/pictures/user/0507f9c4-fb25-4e53-9dc9-4ff17a0b2a45.jpg?aki_policy=profile_medium"
                       alt="" />
                   </div>
                 </button>
                 <div tabindex="0" class="dropdown-content menu bg-white p-2 shadow-xl rounded-box w-52 mt-3">
-                  <div v-if="user != null">
+                  <div v-if="this.$auth.user">
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Message
                     </a>
@@ -81,9 +84,11 @@
                     <a href="" class="px-4 py-3 flex items-center hover:bg-gray-100">
                       Help
                     </a>
-                    <a href="" class="px-4 py-3 flex items-center hover:bg-gray-100">
-                      Log out
-                    </a>
+                    <form @submit="logout" method="post">
+                      <button type="submit" class="px-4 py-3 flex items-center hover:bg-gray-100">
+                        Log out
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -96,7 +101,7 @@
     <Login :id="'login_modal'"></Login>
 
     <Register :id="'register_modal'"></Register>
-    
+
   </div>
 </template>
 
@@ -106,7 +111,15 @@ import Login from './Login.vue'
 import Register from './Register.vue'
 export default {
   components: { Logo, Login, Register },
-  props: ['user']
+  props: ['user'],
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+    }
+  },
+  mounted() {
+    console.log(this.$auth.user);
+  }
 }
 </script>
 
