@@ -27,7 +27,7 @@
                 </div>
                 <div><span class="text-2xs">Whishlist</span></div>
             </a>
-            <a class="text-center max-w-[20%] flex-1" href="/account" v-if="this.$store.state.user.user.length > 0">
+            <router-link class="text-center max-w-[20%] flex-1" to="/account" v-if="this.$store.state.user.user.length > 0">
                 <div class="flex justify-center">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                         focusable="false" style="display: block; height: 24px; width: 24px; fill: currentcolor;">
@@ -39,7 +39,7 @@
                 <div>
                     <span class="text-2xs">Account</span>
                 </div>
-            </a>
+            </router-link>
             <label class="text-center max-w-[20%] flex-1" for="login_modal" v-else>
                 <div class="flex justify-center">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
