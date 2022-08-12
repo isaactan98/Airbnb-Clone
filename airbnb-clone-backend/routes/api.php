@@ -20,6 +20,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/token/csrf', function () {
+    return csrf_token();
+});
+
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken('user_token');
+
+    return ['token' => $token->plainTextToken];
+});
+
 Route::post('/login', [UserController::class, 'api_login']);
+Route::post('/register', [UserController::class, 'api_register']);
 
 Route::get('/hosting/listing', [HostingController::class, 'api_listing']);

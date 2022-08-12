@@ -24,6 +24,9 @@
                         </div>
                     </div>
                     <div class="mt-2">
+                        <span id="login_err"></span>
+                    </div>
+                    <div class="mt-2">
                         <div class="form-control">
                             <button type="submit" id="submit_btn" class="btn bg-pink-600 border-0">Continue</button>
                         </div>
@@ -46,6 +49,7 @@ export default {
         return {
             email: '',
             password: '',
+            token: '',
         }
     },
     methods: {
@@ -53,17 +57,20 @@ export default {
             const submit_btn = document.getElementById('submit_btn');
             submit_btn.classList.add('loading');
             try {
-                await this.$auth.loginWith('local', {
+                await this.$auth.loginWith('laravelSanctum', {
                     data: {
                         email: this.email,
                         password: this.password,
                     }
                 }).then((result) => {
-                    this.$auth.setUser(result.data.user)
-                    // console.log(this.$auth.user);
+                    // this.$auth.setUser(result.data.user)
+                    this.$store.commit('user/add', result.data.user)
+                    console.log(this.$store.state.user.user);
                     submit_btn.classList.remove('loading');
                     const login_modal = document.querySelector('#login_modal');
                     login_modal.click();
+                }).catch((e) => {
+                    console.log(e);
                 })
             } catch (error) {
                 console.log(error);
@@ -71,7 +78,9 @@ export default {
         },
     },
     mounted() {
-        this.$axios.$get('/sanctum/csrf-cookie');
+        // this.$axios.$get('/api/token/csrf').then((result) => {
+        //     this.token = result
+        // });
         const small_register = document.querySelector('#small_register_link');
         small_register.addEventListener('click', (e) => {
             const login_modal = document.querySelector('#login_modal');

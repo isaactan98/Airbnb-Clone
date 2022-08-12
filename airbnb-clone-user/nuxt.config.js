@@ -88,19 +88,18 @@ export default {
       },
       local: {
         token: {
-          property: 'XSRF-TOKEN',// as my backend send meta.token instead of token
+          property: 'access_token',
           required: true,
-          type: 'Bearer',
+          type: 'Bearer'
         },
         endpoints: {
-          login: { url: '/api/login', method: 'post', propertyName: false },
-          user: { url: '/api/user', method: 'get', propertyName: false }
+          login: { url: '/api/login', method: 'post' },
+          user: { url: '/api/user', method: 'get' }
         },
-        tokenRequired: false,
-        tokenType: false,
         user: {
-          property: 'data.user',
-        }
+          property: false, // <--- Default "user"
+          autoFetch: true
+        },
       }
     }
   }

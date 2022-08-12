@@ -51,22 +51,23 @@
                     </svg>
                   </div>
                   <div class="h-8 w-8 ml-3 relative">
-                    <img class="rounded-full" v-if="this.$auth.user" :src="this.$auth.user.profile_photo_url" alt="" />
+                    <img class="rounded-full" v-if="this.$store.state.user.user.length > 0" :src="this.$store.state.user.user[0].data.profile_photo_url"
+                      alt="" />
                     <img class="rounded-full" v-else
                       src="https://avatars.dicebear.com/api/male/john.svg?background=%230000ff">
                   </div>
                 </button>
                 <div tabindex="0" class="dropdown-content menu bg-white p-2 shadow-xl rounded-box w-52 mt-3">
-                  <div v-if="this.$auth.user">
+                  <div v-if="this.$store.state.user.user.length > 0">
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Message
                     </a>
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Trips
                     </a>
-                    <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
+                    <router-link to="/account" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Account
-                    </a>
+                    </router-link>
                   </div>
                   <div v-else>
                     <label for="login_modal"
@@ -115,7 +116,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$auth.user);
+    console.log(this.$store.state.user.user);
   }
 }
 </script>

@@ -46,7 +46,8 @@ class UserController extends Controller
         $request->session()->regenerate();
         return response()->json([
             'message' => 'Login successful',
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'token' => csrf_token(),
         ]);
     }
 }
