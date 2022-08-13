@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="mt-2">
-                        <span id="login_err"></span>
+                        <span id="login_err" class="text-red-400"></span>
                     </div>
                     <div class="mt-2">
                         <div class="form-control">
@@ -54,6 +54,7 @@ export default {
     },
     methods: {
         async login() {
+            const login_err = document.getElementById('login_err');
             const submit_btn = document.getElementById('submit_btn');
             submit_btn.classList.add('loading');
             try {
@@ -65,12 +66,13 @@ export default {
                 }).then((result) => {
                     // this.$auth.setUser(result.data.user)
                     this.$store.commit('user/add', result.data.user)
-                    console.log(this.$store.state.user.user);
+                    // console.log(this.$store.state.user.user);
                     submit_btn.classList.remove('loading');
                     const login_modal = document.querySelector('#login_modal');
                     login_modal.click();
                 }).catch((e) => {
-                    console.log(e);
+                    submit_btn.classList.remove('loading');
+                    login_err.innerHTML = e.response.data.message;
                 })
             } catch (error) {
                 console.log(error);

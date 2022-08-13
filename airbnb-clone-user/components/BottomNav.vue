@@ -1,7 +1,7 @@
 <template>
     <div class="sticky bottom-0 block md:hidden p-4 bg-white">
         <nav class="flex justify-center items-center gap-2">
-            <a class="text-center max-w-[20%] flex-1" href="/">
+            <router-link class="text-center max-w-[20%] flex-1" to="/">
                 <div class="flex justify-center">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                         focusable="false"
@@ -14,7 +14,7 @@
                     </svg>
                 </div>
                 <div><span class="text-2xs">Explore</span></div>
-            </a>
+            </router-link>
             <a class="text-center max-w-[20%] flex-1">
                 <div class="flex justify-center">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
@@ -27,7 +27,7 @@
                 </div>
                 <div><span class="text-2xs">Whishlist</span></div>
             </a>
-            <router-link class="text-center max-w-[20%] flex-1" to="/account" v-if="this.$store.state.user.user.length > 0">
+            <router-link class="text-center max-w-[20%] flex-1" to="/account" v-if="this.$auth.user">
                 <div class="flex justify-center">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                         focusable="false" style="display: block; height: 24px; width: 24px; fill: currentcolor;">

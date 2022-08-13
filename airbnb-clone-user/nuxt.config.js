@@ -82,8 +82,9 @@ export default {
             url: '/api/logout'
           },
         },
-        user: {
-          property: 'data.user',
+        redirect: {
+          login: '/login',
+          home: '/',
         }
       },
       local: {
@@ -102,5 +103,5 @@ export default {
         },
       }
     }
-  }
+  },
 }

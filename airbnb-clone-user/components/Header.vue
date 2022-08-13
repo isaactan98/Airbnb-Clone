@@ -51,14 +51,12 @@
                     </svg>
                   </div>
                   <div class="h-8 w-8 ml-3 relative">
-                    <img class="rounded-full" v-if="this.$store.state.user.user.length > 0" :src="this.$store.state.user.user[0].data.profile_photo_url"
-                      alt="" />
-                    <img class="rounded-full" v-else
-                      src="https://avatars.dicebear.com/api/male/john.svg?background=%230000ff">
+                    <img class="rounded-full" v-if="this.$auth.user" :src="this.$auth.user.profile_photo_url" alt="" />
+                    <img class="rounded-full" v-else src="https://avatars.dicebear.com/api/pixel-art-neutral/none.svg">
                   </div>
                 </button>
                 <div tabindex="0" class="dropdown-content menu bg-white p-2 shadow-xl rounded-box w-52 mt-3">
-                  <div v-if="this.$store.state.user.user.length > 0">
+                  <div v-if="this.$auth.user">
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Message
                     </a>
@@ -83,7 +81,7 @@
                       Help
                     </a>
                     <form @submit="logout" method="post">
-                      <button type="submit" class="px-4 py-3 flex items-center hover:bg-gray-100">
+                      <button type="submit" class="px-4 py-3 flex items-center hover:bg-gray-100 w-full">
                         Log out
                       </button>
                     </form>
