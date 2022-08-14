@@ -116,7 +116,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem('user_token')
-      this.$router.push('/')
+      window.location.href = '/'
     }
   },
   mounted() {
