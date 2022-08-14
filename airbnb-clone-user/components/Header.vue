@@ -51,12 +51,12 @@
                     </svg>
                   </div>
                   <div class="h-8 w-8 ml-3 relative">
-                    <img class="rounded-full" v-if="this.$auth.user" :src="this.$auth.user.profile_photo_url" alt="" />
+                    <img class="rounded-full" v-if="user" :src="user.profile_photo_url" alt="" />
                     <img class="rounded-full" v-else src="https://avatars.dicebear.com/api/pixel-art-neutral/none.svg">
                   </div>
                 </button>
                 <div tabindex="0" class="dropdown-content menu bg-white p-2 shadow-xl rounded-box w-52 mt-3">
-                  <div v-if="this.$auth.user">
+                  <div v-if="user">
                     <a href="" class="px-4 py-3 flex items-center text-black hover:bg-gray-100">
                       Message
                     </a>
@@ -80,7 +80,7 @@
                     <a href="" class="px-4 py-3 flex items-center hover:bg-gray-100">
                       Help
                     </a>
-                    <form @submit="logout" method="post">
+                    <form @submit="logout" method="post" v-if="user">
                       <button type="submit" class="px-4 py-3 flex items-center hover:bg-gray-100 w-full">
                         Log out
                       </button>
@@ -108,13 +108,19 @@ import Register from './Register.vue'
 export default {
   components: { Logo, Login, Register },
   props: ['user'],
+  data() {
+    return {
+      data: null
+    }
+  },
   methods: {
-    async logout() {
-      await this.$auth.logout()
+    logout() {
+      localStorage.removeItem('user_token')
+      this.$router.push('/')
     }
   },
   mounted() {
-    console.log(this.$store.state.user.user);
+
   }
 }
 </script>

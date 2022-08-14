@@ -27,7 +27,7 @@
                 </div>
                 <div><span class="text-2xs">Whishlist</span></div>
             </a>
-            <router-link class="text-center max-w-[20%] flex-1" to="/account" v-if="this.$auth.user">
+            <router-link class="text-center max-w-[20%] flex-1" to="/account" v-if="user">
                 <div class="flex justify-center">
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
                         focusable="false" style="display: block; height: 24px; width: 24px; fill: currentcolor;">

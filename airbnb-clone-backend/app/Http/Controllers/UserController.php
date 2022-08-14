@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+
+    public function api_get_user(Request $request)
+    {
+        $user = User::query()->where('user_token', $request->user_token)->first();
+        return response()->json($user);
+    }
 
     public function api_token(Request $request)
     {
@@ -31,6 +35,8 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->save();
+            $user->user_token = md5('secret' . $user->id);
             $user->save();
             return response()->json(['message' => 'User created successfully!', 'user' => $user]);
         }

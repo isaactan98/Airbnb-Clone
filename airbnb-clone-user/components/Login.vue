@@ -54,6 +54,7 @@ export default {
     },
     methods: {
         async login() {
+            var md5 = require('md5');
             const login_err = document.getElementById('login_err');
             const submit_btn = document.getElementById('submit_btn');
             submit_btn.classList.add('loading');
@@ -64,12 +65,11 @@ export default {
                         password: this.password,
                     }
                 }).then((result) => {
-                    // this.$auth.setUser(result.data.user)
-                    this.$store.commit('user/add', result.data.user)
-                    // console.log(this.$store.state.user.user);
+                    localStorage.setItem('user_token', md5('secret' + result.data.user.id));
                     submit_btn.classList.remove('loading');
                     const login_modal = document.querySelector('#login_modal');
                     login_modal.click();
+                    window.location.href = '/';
                 }).catch((e) => {
                     submit_btn.classList.remove('loading');
                     login_err.innerHTML = e.response.data.message;
@@ -80,9 +80,6 @@ export default {
         },
     },
     mounted() {
-        // this.$axios.$get('/api/token/csrf').then((result) => {
-        //     this.token = result
-        // });
         const small_register = document.querySelector('#small_register_link');
         small_register.addEventListener('click', (e) => {
             const login_modal = document.querySelector('#login_modal');

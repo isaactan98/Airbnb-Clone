@@ -32,5 +32,6 @@ Route::post('/tokens/create', function (Request $request) {
 
 Route::post('/login', [UserController::class, 'api_login']);
 Route::post('/register', [UserController::class, 'api_register']);
+Route::post('/user_token', [UserController::class, 'api_get_user']);
 
 Route::get('/hosting/listing', [HostingController::class, 'api_listing']);

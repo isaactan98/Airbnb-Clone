@@ -2,7 +2,7 @@
   <div>
     <Header :user="user"></Header>
     <Nuxt />
-    <BottomNav></BottomNav>
+    <BottomNav :user="user"></BottomNav>
   </div>
 </template>
 
@@ -14,6 +14,18 @@ export default {
   data() {
     return {
       user: null
+    }
+  },
+  mounted() {
+    let token = localStorage.getItem('user_token') ?? null
+    if (token != null) {
+      this.$axios.$post('/api/user_token', {
+        user_token: token
+      }).then((result) => {
+        this.user = result
+      }).catch((error) => {
+        console.log(error);
+      })
     }
   }
 };
