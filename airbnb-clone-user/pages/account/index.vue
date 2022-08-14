@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="px-6 mt-4 block md:hidden">
-            <form @submit="logout" method="post">
+            <form @submit.prevent="logout" method="post">
                 <button class="btn btn-outline w-full" type="submit">Log Out</button>
             </form>
         </div>
@@ -70,6 +70,8 @@ export default {
             }).catch((error) => {
                 console.log(error);
             })
+        } else {
+            window.location.href = '/'
         }
     }
 

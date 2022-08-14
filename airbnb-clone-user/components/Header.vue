@@ -80,7 +80,7 @@
                     <a href="" class="px-4 py-3 flex items-center hover:bg-gray-100">
                       Help
                     </a>
-                    <form @submit="logout" method="post" v-if="user">
+                    <form @submit.prevent="logout" method="post" v-if="user">
                       <button type="submit" class="px-4 py-3 flex items-center hover:bg-gray-100 w-full">
                         Log out
                       </button>
