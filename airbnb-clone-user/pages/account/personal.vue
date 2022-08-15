@@ -30,7 +30,7 @@
             <label :for="y.id" class="modal modal-bottom sm:modal-middle cursor-pointer">
                 <label class="modal-box relative" for="">
                     <h3 class="text-lg font-bold">{{ y.name }}</h3>
-                    <form @submit.prevent="update(y.uuid, y.id)" method="post">
+                    <form @submit.prevent="update(y)" method="post">
                         <div>
                             <div class="form-control">
                                 <input :type="y.type" :name="y.uuid" class="input input-bordered"
@@ -133,16 +133,19 @@ export default {
         }
     },
     methods: {
-        update(uuid, id) {
-            console.log(uuid);
+        update(info) {
+            const submit = document.getElementById(info.submit)
+            submit.classList.add('loading')
             this.$axios.$post('/api/update/user', {
                 user_token: localStorage.getItem('user_token'),
-                [uuid]: this.user[uuid]
+                [info.uuid]: this.user[info.uuid]
             }).then((result) => {
-                this.$toast.success(result.message)
-                const modal = document.getElementById(id);
+                submit.classList.remove('loading')
+                const modal = document.getElementById(info.id);
                 modal.click();
+                this.$toast.success(result.message)
             }).catch((error) => {
+                submit.classList.remove('loading')
                 console.log(error);
             })
         }
