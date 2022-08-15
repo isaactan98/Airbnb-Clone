@@ -59,7 +59,7 @@ export default {
             const submit_btn = document.getElementById('submit_btn');
             submit_btn.classList.add('loading');
             try {
-                await this.$auth.loginWith('laravelSanctum', {
+                await this.$auth.loginWith('local', {
                     data: {
                         email: this.email,
                         password: this.password,

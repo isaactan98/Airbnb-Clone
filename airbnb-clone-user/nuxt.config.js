@@ -72,22 +72,6 @@ export default {
 
   auth: {
     strategies: {
-      laravelSanctum: {
-        provider: 'laravel/sanctum',
-        url: process.env.BACKEND_URL,
-        endpoints: {
-          login: {
-            url: '/api/login'
-          },
-          logout: {
-            url: '/api/logout'
-          },
-        },
-        redirect: {
-          login: '/login',
-          home: '/',
-        }
-      },
       local: {
         token: {
           property: 'access_token',
