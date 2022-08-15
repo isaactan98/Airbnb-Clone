@@ -1,6 +1,7 @@
 <template>
     <div class="min-h-screen">
         <div v-if="this.data == null" class="pt-9">
+            <div class="bg-zinc-200 py-20 px-10 animate-pulse"></div>
         </div>
         <div class="pt-9 container mx-auto" v-else>
             <div class="py-3 px-6">
@@ -8,7 +9,7 @@
                     <img :src="this.data.profile_photo_url" class="rounded-full" alt="">
                 </div>
                 <div>
-                    <h1>{{ this.data.name }}</h1>
+                    <h1 class="text-3xl font-semibold mb-4">{{ this.data.name }}</h1>
                 </div>
             </div>
             <div class="px-6">

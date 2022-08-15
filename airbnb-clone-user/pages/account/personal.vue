@@ -5,7 +5,7 @@
                 <span class="text-xl md:text-3xl font-extrabold text-zinc-600">Personal Info</span>
             </div>
             <div class="relative my-2" v-if="this.user == null">
-                <div class="bg-zinc-100 animate-pulse"></div>
+                <div class="bg-zinc-200 py-20 px-10 rounded-md animate-pulse"></div>
             </div>
             <div class="relative my-2" v-else>
 
