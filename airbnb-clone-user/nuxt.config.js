@@ -37,6 +37,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next',
+    '@nuxtjs/toast',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -104,4 +105,10 @@ export default {
       }
     }
   },
+
+  toast: {
+    position: 'top-right',
+    theme: "outline",
+    duration: 3000
+  }
 }

@@ -56,4 +56,15 @@ class UserController extends Controller
             'token' => csrf_token(),
         ]);
     }
+
+    public function api_update_user(Request $request)
+    {
+        $user = User::query()->where('user_token', $request->user_token)->first();
+        if ($request->name) {
+            $user->name = $request->name;
+        }
+
+        $user->update();
+        return response()->json(['message' => 'User updated successfully!', 'user' => $user]);
+    }
 }

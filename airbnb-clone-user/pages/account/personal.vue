@@ -1,18 +1,21 @@
 <template>
-    <div class="px-5 md:px-12 lg:px-16 xl:px-20">
+    <div class="container mx-auto px-5 md:px-12 lg:px-16 xl:px-20">
         <div class="min-h-screen bg-white">
             <div class="my-10">
                 <span class="text-xl md:text-3xl font-extrabold text-zinc-600">Personal Info</span>
             </div>
-            <div class="relative my-2" v-if="this.user == null"></div>
+            <div class="relative my-2" v-if="this.user == null">
+                <div class="bg-zinc-100 animate-pulse"></div>
+            </div>
             <div class="relative my-2" v-else>
 
                 <div class="border-b" v-for="x, key in info" :key="key">
-                    <div class="py-6 flex">
+                    <div class="py-6 flex" v-if="user.hasOwnProperty(x.uuid)">
                         <div class="flex flex-col flex-1 w-full">
                             <div>{{ x.name }}</div>
-                            <div class="text-zinc-500 text-sm" v-if="x.uuid == user[x.uuid]">{{ userx[x.uuid]
-                            }}</div>
+                            <div class="text-zinc-500 text-sm">
+                                {{ user[x.uuid] }}
+                            </div>
                         </div>
                         <div class="ml-4 max-w-[30%] text-right">
                             <label :for="x.id" class="underline cursor-pointer">Edit</label>
@@ -27,13 +30,12 @@
             <label :for="y.id" class="modal modal-bottom sm:modal-middle cursor-pointer">
                 <label class="modal-box relative" for="">
                     <h3 class="text-lg font-bold">{{ y.name }}</h3>
-                    <form method="post">
+                    <form @submit.prevent="update(y.uuid, y.id)" method="post">
                         <div>
                             <div class="form-control">
-                                <label for="" class="label">
-                                    <span class="label-text">{{ y.name }}</span>
-                                </label>
-                                <input type="email" name="email" class="input input-bordered">
+                                <input :type="y.type" :name="y.uuid" class="input input-bordered"
+                                    v-if="user.hasOwnProperty(y.uuid)" :value="user[y.uuid]" autocomplete="off"
+                                    v-model="user[y.uuid]">
                             </div>
                         </div>
                         <div class="mt-2">
@@ -65,13 +67,7 @@ export default {
                     value: 'John Doe',
                     id: "name_modal",
                     submit: "name_submit",
-                },
-                {
-                    name: "Email",
-                    value: '',
-                    uuid: "email",
-                    id: "email_modal",
-                    submit: "email_submit",
+                    type: "text",
                 },
                 {
                     name: "Phone",
@@ -79,6 +75,7 @@ export default {
                     uuid: "phone",
                     id: "phone_modal",
                     submit: "phone_submit",
+                    type: "tel",
                 },
                 {
                     name: "Address",
@@ -86,6 +83,7 @@ export default {
                     uuid: "address",
                     id: "address_modal",
                     submit: "address_submit",
+                    type: "text",
                 },
                 {
                     name: "City",
@@ -93,6 +91,7 @@ export default {
                     uuid: "city",
                     id: "city_modal",
                     submit: "city_submit",
+                    type: "text",
                 },
                 {
                     name: "State",
@@ -100,6 +99,7 @@ export default {
                     uuid: "state",
                     id: "state_modal",
                     submit: "state_submit",
+                    type: "text",
                 },
                 {
                     name: "Zip",
@@ -107,6 +107,7 @@ export default {
                     uuid: "zip",
                     id: "zip_modal",
                     submit: "zip_submit",
+                    type: "text",
                 },
                 {
                     name: "Country",
@@ -114,6 +115,7 @@ export default {
                     uuid: "country",
                     id: "country_modal",
                     submit: "country_submit",
+                    type: "text",
                 },
             ]
         }
@@ -130,6 +132,21 @@ export default {
             })
         }
     },
+    methods: {
+        update(uuid, id) {
+            console.log(uuid);
+            this.$axios.$post('/api/update/user', {
+                user_token: localStorage.getItem('user_token'),
+                [uuid]: this.user[uuid]
+            }).then((result) => {
+                this.$toast.success(result.message)
+                const modal = document.getElementById(id);
+                modal.click();
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+    }
 }
 </script>
 
