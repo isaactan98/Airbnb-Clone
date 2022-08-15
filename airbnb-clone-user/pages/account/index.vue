@@ -6,7 +6,7 @@
         <div class="pt-9 container mx-auto" v-else>
             <div class="py-3 px-6">
                 <div class="mb-4">
-                    <img :src="this.data.profile_photo_url" class="rounded-full" alt="">
+                    <img :src="this.data.profile_photo_url" class="rounded-full w-28" alt="">
                 </div>
                 <div>
                     <h1 class="text-3xl font-semibold mb-4">{{ this.data.name }}</h1>
