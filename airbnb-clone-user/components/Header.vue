@@ -33,7 +33,7 @@
         <div class="hidden md:block flex-[1_0_140px]">
           <div class="flex justify-end items-center relative">
             <div class="flex justify-end mr-2">
-              <a href="" class="text-black p-3 rounded-full hover:bg-gray-100">Become a Host</a>
+              <a href="" class="text-black p-3 text-sm md:text-base rounded-full hover:bg-gray-100">Become a Host</a>
             </div>
             <div>
               <div class="inline-block relative dropdown dropdown-end">
