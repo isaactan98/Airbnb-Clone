@@ -6,20 +6,16 @@
         <div class="bg-white p-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
           v-if="show_list == false">
           <div class="grid relative" v-for="x, index in 10" :key="index">
-            <a href="" class="block absolute h-full w-full top-0"></a>
             <div class="mb-3">
               <div class="rounded-box relative overflow-clip aspect-square">
                 <div class="grid grid-flow-col auto-cols-fr h-full justify-start ">
                   <div class="grid h-full relative">
-                    <a href="">
-                      <div class="inline-block h-full w-full align-bottom min-h-[100px] bg-no-repeat bg-cover"
-                        style="background-position:50% 50%">
-                        <picture>
-                          <span
-                            class="absolute h-full w-full object-cover align-bottom bg-gray-100 animate-pulse"></span>
-                        </picture>
-                      </div>
-                    </a>
+                    <div class="inline-block h-full w-full align-bottom min-h-[100px] bg-no-repeat bg-cover"
+                      style="background-position:50% 50%">
+                      <picture>
+                        <span class="absolute h-full w-full object-cover align-bottom bg-gray-200 animate-pulse"></span>
+                      </picture>
+                    </div>
                   </div>
                 </div>
               </div>
