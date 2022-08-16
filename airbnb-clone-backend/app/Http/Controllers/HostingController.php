@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hosting;
+use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -18,6 +19,11 @@ class HostingController extends Controller
     public $hosting_type = [
         'shared' => 'Shared',
         'dedicated' => 'Dedicated',
+    ];
+
+    public $room_status = [
+        'available' => 'Available',
+        'not_available' => 'Not Available',
     ];
 
     public function listing()
@@ -52,7 +58,19 @@ class HostingController extends Controller
                 $hosting->status = $request->status;
                 $hosting->save();
 
-                session()->flash('flash.banner', 'Yay for free components!');
+                $room_name = $request->room_name;
+                for ($i = 0; $i < count($room_name); $i++) {
+                    $room = new Rooms();
+                    $room->name = $room_name[$i];
+                    $room->description = $request->room_description[$i];
+                    $room->price = $request->room_price[$i];
+                    $room->bed = $request->room_bed[$i];
+                    $room->status = $request->room_status[$i];
+                    $room->hosting_id = $hosting->id;
+                    $room->save();
+                }
+
+                session()->flash('flash.banner', 'Successfully created new hosting');
                 session()->flash('flash.bannerStyle', 'success');
 
                 return redirect()->route('hosting.listing');
@@ -64,6 +82,7 @@ class HostingController extends Controller
             'submit' => route('hosting.create'),
             'hosting_status' => $this->hosting_status,
             'hosting_type' => $this->hosting_type,
+            'room_status' => $this->room_status,
         ]);
     }
 
@@ -84,6 +103,30 @@ class HostingController extends Controller
                 $hosting->hosting_type = $request->type;
                 $hosting->status = $request->status;
                 $hosting->save();
+
+                $room_name = $request->room_name;
+                for ($i = 0; $i < count($room_name); $i++) {
+                    if ($request->room_id[$i]) {
+                        $room = Rooms::find($request->room_id[$i]);
+                        $room->name = $room_name[$i];
+                        $room->description = $request->room_description[$i];
+                        $room->price = $request->room_price[$i];
+                        $room->bed = $request->room_bed[$i];
+                        $room->status = $request->room_status[$i];
+                        $room->hosting_id = $hosting->id;
+                        $room->update();
+                    } else {
+                        $room = new Rooms();
+                        $room->name = $room_name[$i];
+                        $room->description = $request->room_description[$i];
+                        $room->price = $request->room_price[$i];
+                        $room->bed = $request->room_bed[$i];
+                        $room->status = $request->room_status[$i];
+                        $room->hosting_id = $hosting->id;
+                        $room->save();
+                    }
+                }
+
                 session()->flash('flash.banner', 'Succesfully updated hosting!');
                 session()->flash('flash.bannerStyle', 'success');
                 return redirect()->route('hosting.listing');
@@ -97,12 +140,13 @@ class HostingController extends Controller
             'hosting' => $hosting,
             'hosting_status' => $this->hosting_status,
             'hosting_type' => $this->hosting_type,
+            'room_status' => $this->room_status,
         ]);
     }
 
     public function api_listing()
     {
-        $hostings = Hosting::query()
+        $hostings = Hosting::query()->with('rooms')
             ->where('status', 'active')
             ->orderBy('created_at', 'desc')
             ->get();
